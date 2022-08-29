@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+// UITabBarController = tabbar view ko lagi
 class ViewController: UITabBarController {
 
     override func viewDidLoad() {
@@ -28,6 +28,11 @@ class ViewController: UITabBarController {
         btn3.tabBarItem.image = UIImage(systemName: "magnifyingglass")
         btn4.tabBarItem.image = UIImage(systemName: "arrow.down.to.line")
         
+        // set title for item bar
+        btn1.title = "Home"
+        btn2.title = "Upcomming"
+        btn3.title = "Search"
+        btn4.title = "Download"
         
         // assign btn for tab bar
         setViewControllers([btn1,btn2,btn3,btn4], animated: true)

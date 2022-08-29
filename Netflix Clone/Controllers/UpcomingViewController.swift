@@ -13,7 +13,7 @@ class UpcomingViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        view.backgroundColor = .systemTeal
+        view.backgroundColor = .systemBackground
     }
 
 }
