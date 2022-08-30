@@ -10,8 +10,9 @@ import UIKit
 class HomeViewController: UIViewController {
     
     private let homeFeedTable: UITableView = {
-        let table = UITableView()
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        let table = UITableView(frame: .zero, style: .grouped)
+        // call CollectionViewTableViewCell calss from ViewModels
+        table.register(CollectionViewTableViewCell.self, forCellReuseIdentifier: CollectionViewTableViewCell.indentifier)
         return table
     }()
 
@@ -36,26 +37,38 @@ class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
-    // set number of row
+    
+    // set number of sections
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 20
+    }
+    
+    // set number of row in each sections
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 15
+        return 1
     }
     // loop for table view
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        // set text for each row
-        cell.textLabel?.text = "MERO LIST"
-        //change background color 
-        cell.backgroundColor = .systemTeal
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+//        // set text for each row
+//        cell.textLabel?.text = "MERO LIST"
+//        //change background color
+//        cell.backgroundColor = .systemTeal
+//        return cell
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.indentifier, for: indexPath) as? CollectionViewTableViewCell else{
+            return UITableViewCell()
+        }
+        
         return cell
     }
     // set height for each row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 200
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return 20
     }
     
     
