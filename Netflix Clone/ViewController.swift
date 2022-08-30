@@ -34,6 +34,9 @@ class ViewController: UITabBarController {
         btn3.title = "Search"
         btn4.title = "Download"
         
+        // set tintColer  
+        //Tint color is a "default" or "fallback" color for the application or UIView
+        tabBar.tintColor = .label
         // assign btn for tab bar
         setViewControllers([btn1,btn2,btn3,btn4], animated: true)
     }
