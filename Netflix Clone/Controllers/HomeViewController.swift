@@ -20,7 +20,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .black
         // add subview
         view.addSubview(homeFeedTable)
         
