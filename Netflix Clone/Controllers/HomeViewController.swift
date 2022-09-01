@@ -27,7 +27,7 @@ class HomeViewController: UIViewController {
         homeFeedTable.delegate = self
         homeFeedTable.dataSource = self
         
-        let headerView = HeroHeaderUIView(frame: CGRect(x:0,y:0, width: view.bounds.width, height:450))
+        let headerView = HeroHeaderUIView(frame: CGRect(x:0,y:0, width: view.bounds.width, height:400))
         //homeFeedTable.tableHeaderView = UIView(frame: CGRect(x:0,y:0, width: view.bounds.width, height:450))
         homeFeedTable.tableHeaderView = headerView
 
@@ -68,11 +68,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     // set height for each row
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+        return 150
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 20
+        return 0
     }
     
     
