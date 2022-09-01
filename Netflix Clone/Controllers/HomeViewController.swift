@@ -26,6 +26,10 @@ class HomeViewController: UIViewController {
         
         homeFeedTable.delegate = self
         homeFeedTable.dataSource = self
+        
+        let headerView = HeroHeaderUIView(frame: CGRect(x:0,y:0, width: view.bounds.width, height:450))
+        //homeFeedTable.tableHeaderView = UIView(frame: CGRect(x:0,y:0, width: view.bounds.width, height:450))
+        homeFeedTable.tableHeaderView = headerView
 
     }
     
@@ -40,7 +44,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     // set number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 20
+        return 5
     }
     
     // set number of row in each sections
