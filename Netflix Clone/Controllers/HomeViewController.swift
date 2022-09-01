@@ -9,6 +9,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    let sectionTitle: [String] = ["Treding Movies", "Popular", "Trending Tv", "Upcomming Movies", "Top rated"]
+    
     private let homeFeedTable: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         // call CollectionViewTableViewCell calss from ViewModels
@@ -61,7 +63,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     // set number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return sectionTitle.count
     }
     
     // set number of row in each sections
@@ -100,6 +102,22 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let offeset = scrollView.contentOffset.y + defaultOffset
         
         navigationController?.navigationBar.transform = .init(translationX: 0, y: min (0,-offeset))
+    }
+    
+    
+    // set section title in header section
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int)-> String?{
+        return sectionTitle[section]
+    }
+    
+    // display property for header section title
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
+        guard let header = view as? UITableViewHeaderFooterView else{return}
+        
+        header.textLabel?.font = .systemFont(ofSize: 18, weight : .semibold)
+        header.textLabel?.frame = CGRect(x: header.bounds.origin.x + 20, y: header.bounds.origin.y, width: 100, height: header.bounds.height)
+        header.textLabel?.textColor = .white
+        header.textLabel?.text = header.textLabel?.text?.lowercased()
     }
     
     
