@@ -133,6 +133,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         header.textLabel?.textColor = .white
         //header.textLabel?.text = header.textLabel?.text?.lowercased()
         // create extension capitalizeFirstLetter for change first letter to be capital
+        //capitalizeFirstLetter is custome function
         header.textLabel?.text = header.textLabel?.text?.capitalizeFirstLetter()
     }
     
