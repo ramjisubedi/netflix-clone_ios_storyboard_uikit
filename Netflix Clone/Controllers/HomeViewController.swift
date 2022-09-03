@@ -7,6 +7,15 @@
 
 import UIKit
 
+// fetchData ma dherai vayer case use garera garna lako
+enum Sections: Int{
+    case TrendingMovies = 0
+    case TrendingTv = 1
+    case Popular = 2
+    case Upcomming = 3
+    case TopRated = 4
+}
+
 class HomeViewController: UIViewController {
     
     let sectionTitle: [String] = ["Treding Movies", "Trending Tv", "Popular",  "Upcomming Movies", "Top rated"]
@@ -37,7 +46,9 @@ class HomeViewController: UIViewController {
         //homeFeedTable.tableHeaderView = UIView(frame: CGRect(x:0,y:0, width: view.bounds.width, height:450))
         homeFeedTable.tableHeaderView = headerView
         
-        getTrendingMovies()
+         //fetchData()
+        //getTrendingMovies()
+        //getTrendingTv()
 
     }
     
@@ -59,12 +70,95 @@ class HomeViewController: UIViewController {
         homeFeedTable.frame = view.bounds
     }
     
+    
+    
+//    // sabai yeutai bata garna try gareko
+//    private func fetchData(){
+//
+//        // trending movies api call greko data
+//        APICaller.shated.getTrendingMovies { results in
+//            switch results {
+//            case .success(let movies):
+//                print("Movies API DATA")
+//                print(movies)
+//                //cell.configure(movies)
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+//        // trending TV
+//        APICaller.shated.getTrendingTv { results in
+//            switch results {
+//            case .success(let movies):
+//                print("TV API DATA")
+//                print(movies)
+//                //cell.configure(movies)
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+//        // upcomming movies
+//        APICaller.shated.getUpcomingMoview { results in
+//            switch results {
+//            case .success(let movies):
+//                print("Upcoming API DATA")
+//                print(movies)
+//                //cell.configure(movies)
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+//
+//        // popular movies
+//        APICaller.shated.getPopular { results in
+//            switch results {
+//            case .success(let movies):
+//                print("Popular API DATA")
+//                print(movies)
+//                //cell.configure(movies)
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+//
+//        // popular movies
+//        APICaller.shated.getTopRated { results in
+//            switch results {
+//            case .success(let movies):
+//                print("Top Rated API DATA")
+//                print(movies)
+//                //cell.configure(movies)
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+//
+//
+//    }
+    
+    
+    // different different gerera API call gareda
     private func getTrendingMovies(){
         //APICaller.shated.getTrendingMovies{_ in}
         APICaller.shated.getTrendingMovies { results in
             switch results {
             case .success(let movies):
+                print("Movies API DATA")
                 print(movies)
+                //cell.configure(movies)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func getTrendingTv(){
+        //APICaller.shated.getTrendingMovies{_ in}
+        APICaller.shated.getTrendingTv { results in
+            switch results {
+            case .success(let tv):
+                print("TV API DATA")
+                print(tv)
             case .failure(let error):
                 print(error)
             }
@@ -96,6 +190,68 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.indentifier, for: indexPath) as? CollectionViewTableViewCell else{
             return UITableViewCell()
         }
+       
+        switch indexPath.section {
+        case Sections.TrendingMovies.rawValue:
+            APICaller.shated.getTrendingMovies { results in
+                switch results {
+                case .success(let titles):
+                    print("Movies API DATA")
+                    print(titles)
+                    cell.configure(with:titles)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        case Sections.TrendingTv.rawValue:
+            APICaller.shated.getTrendingTv { results in
+                switch results {
+                case .success(let titles):
+                    print("TV API DATA")
+                    print(titles)
+                    cell.configure(with:titles)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        case Sections.Popular.rawValue:
+            APICaller.shated.getPopular { results in
+                switch results {
+                case .success(let titles):
+                    print("Popular API DATA")
+                    print(titles)
+                    cell.configure(with:titles)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        case Sections.Upcomming.rawValue:
+            APICaller.shated.getUpcomingMoview { results in
+                switch results {
+                case .success(let titles):
+                    print("TV API DATA")
+                    print(titles)
+                    cell.configure(with:titles)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        case Sections.TopRated.rawValue:
+            APICaller.shated.getTopRated { results in
+                switch results {
+                case .success(let titles):
+                    print("Top ated API DATA")
+                    print(titles)
+                    cell.configure(with:titles)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            
+        default:
+            return UITableViewCell()
+        }
+        
         
         return cell
     }
