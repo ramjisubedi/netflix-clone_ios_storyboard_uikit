@@ -42,6 +42,8 @@ class SearchViewController: UIViewController {
             
             
             fetchUpcoming()
+            
+            searchController.searchResultsUpdater = self
         }
         
         override func viewDidLayoutSubviews() {
@@ -102,4 +104,28 @@ class SearchViewController: UIViewController {
             return 120
         }
     }
+
+extension SearchViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        
+        guard let query = searchBar.text,
+              !query.trimmingCharacters(in: .whitespaces).isEmpty,
+              query.trimmingCharacters(in: .whitespaces).count >= 3,
+              let resultController = searchController.searchResultsController as? SearchResultsViewController else {return}
+        
+        APICaller.shated.search(with: query ){ result in
+            DispatchQueue.main.async{
+                switch result {
+                case .success(let titles):
+                    resultController.titles = titles
+                    resultController.searchResultCollectionView.reloadData()
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+}
 
